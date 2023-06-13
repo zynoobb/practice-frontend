@@ -1,3 +1,4 @@
+import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import {
   Address,
@@ -23,6 +24,17 @@ import {
   ZipcodeWrapper,
   Error,
 } from "../../../styles/boardNew";
+
+// writer, title, contents // _id, number, message
+const CREATE_BOARD = gql`
+  mutation createBoard($writer: String, $title: String, $contents: String) {
+    createBoard(writer: $writer, title: $title, contents: $contents) {
+      _id
+      number
+      message
+    }
+  }
+`;
 
 export default function BoardsNewPage() {
   // 작성자 이름 / 비밀번호 / 제목 / 내용 / 주소 / 유튜브 / 메인설정
@@ -61,7 +73,9 @@ export default function BoardsNewPage() {
     }
   }
 
-  const onClickSubmit = () => {
+  const [createBoard] = useMutation(CREATE_BOARD);
+
+  const onClickSubmit = async () => {
     if (!writer) {
       setWriterError("작성자를 입력해주세요.");
     }
@@ -75,7 +89,14 @@ export default function BoardsNewPage() {
       setContentsError("내용을 입력해주세요.");
     }
     if (writer && password && title && contents) {
-      alert("게시글 작성 완료");
+      const result = await createBoard({
+        variables: {
+          writer,
+          title,
+          contents,
+        },
+      });
+      console.log(result);
     }
   };
   return (
