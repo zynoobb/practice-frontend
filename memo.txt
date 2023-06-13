@@ -48,3 +48,7 @@ uri = https://google.com?search=철수#aaa
 
 // section 05
 라우팅 - 페이지 이동 // useRouter() // router.push("이동할 페이지")
+
+옵셔널-체이닝(Optional-chaining) - data?fetchBoard
+널리시-체이닝(nullish-chaining) -data??data.fetchBoard => 비어있을 시 오른쪽 것 실행
+  => null || undefined
