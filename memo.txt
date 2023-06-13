@@ -1,0 +1,18 @@
+// section 01
+page - front-end 페이지 화면들
+public - 사진, 아이콘 등
+style - css 파일
+
+리액트에서는 html + js 가 합쳐짐
+  자바스크립트 안에 html이 들어가 있는 형태로 진행
+  불러오는 것을 모두 import 로 통일 
+
+JSX - React 전용 html // ex) div className
+  html + css + js 가 합쳐진 방식
+
+Emotion
+  간결한 코드 / 태그에 의미 부여 / 코드 재사용성 증가
+
+CSS-in-js
+  emotion (styled-components의 업그레이드 버전) 사용
+  styled-components
