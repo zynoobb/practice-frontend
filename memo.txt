@@ -52,3 +52,12 @@ uri = https://google.com?search=철수#aaa
 옵셔널-체이닝(Optional-chaining) - data?fetchBoard
 널리시-체이닝(nullish-chaining) -data??data.fetchBoard => 비어있을 시 오른쪽 것 실행
   => null || undefined
+
+// section 06
+패턴
+- 컨테이너 / 프리젠테이셔널 패턴 => 과거에 자주 사용
+- 훅스 패턴 (함수) => 현재 자주 사용
+- 아토믹 패턴 (잘게 쪼갬 like 원자)
+
+- 리액트의 데이터 흐름 => 단방향 (부모가 자식에게만 줄 수 있으므로)
+
