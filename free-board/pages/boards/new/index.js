@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   Address,
@@ -47,6 +48,7 @@ export default function BoardsNewPage() {
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
+  const router = useRouter();
 
   function onChangeWriter(event) {
     setWriter(event.target.value);
@@ -76,6 +78,7 @@ export default function BoardsNewPage() {
   const [createBoard] = useMutation(CREATE_BOARD);
 
   const onClickSubmit = async () => {
+    console.log("asdds");
     if (!writer) {
       setWriterError("작성자를 입력해주세요.");
     }
@@ -89,14 +92,19 @@ export default function BoardsNewPage() {
       setContentsError("내용을 입력해주세요.");
     }
     if (writer && password && title && contents) {
-      const result = await createBoard({
-        variables: {
-          writer,
-          title,
-          contents,
-        },
-      });
-      console.log(result);
+      try {
+        const result = await createBoard({
+          variables: {
+            writer,
+            title,
+            contents,
+          },
+        });
+
+        router.push(String(result.data.createBoard.number));
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
   return (
