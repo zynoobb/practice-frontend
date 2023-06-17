@@ -1,10 +1,10 @@
-import { CREATE_BOARD } from "./BoardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 
-export default function BoardWrite() {
+export default function BoardWrite(props) {
   // 작성자 이름 / 비밀번호 / 제목 / 내용 / 주소 / 유튜브 / 메인설정
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -57,6 +57,7 @@ export default function BoardWrite() {
   }
 
   const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const onClickSubmit = async () => {
     console.log("asdds");
@@ -89,6 +90,28 @@ export default function BoardWrite() {
     }
   };
 
+  const onClickUpdate = async () => {
+    if (!title && !contents) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
+    if (!password) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
+    const valueObj = {
+      number: Number(router.query.number),
+    };
+    if (title) valueObj.title = title;
+    if (writer) valueObj.writer = writer;
+    if (contents) valueObj.contents = contents;
+
+    const result = await updateBoard({
+      variables: valueObj,
+    });
+    router.push(`boards/${result.data.updateBoard.number}`);
+  };
   return (
     <BoardWriteUI
       writerError={writerError}
@@ -101,6 +124,9 @@ export default function BoardWrite() {
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
       isActive={isActive}
+      isEdit={props.isEdit}
+      onClickUpdate={onClickUpdate}
+      data={props.data}
     />
   );
 }
