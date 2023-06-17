@@ -61,3 +61,6 @@ uri = https://google.com?search=철수#aaa
 
 - 리액트의 데이터 흐름 => 단방향 (부모가 자식에게만 줄 수 있으므로)
 
+// section 10
+JSX => javascript XML
+JSX이 있을 경우에는 tsx 파일로 설정

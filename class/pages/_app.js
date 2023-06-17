@@ -3,7 +3,7 @@
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component }) {
   // graphql 적용
   const client = new ApolloClient({
     uri: "http://backend-example.codebootcamp.co.kr/graphql",
