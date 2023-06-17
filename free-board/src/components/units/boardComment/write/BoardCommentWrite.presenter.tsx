@@ -1,7 +1,9 @@
 import * as S from "./BoardCommentWrite.styles";
-import { IBoardCommentWriteUIProps } from "./BoardCommentWrite.types";
+import type { IBoardCommentWriteUIProps } from "./BoardCommentWrite.types";
 
-export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
+export default function BoardCommentWriteUI(
+  props: IBoardCommentWriteUIProps
+): JSX.Element {
   return (
     <S.Wrapper>
       <>
@@ -9,10 +11,7 @@ export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
         <span>댓글</span>
       </>
       <S.InputWrapper>
-        <S.Input
-          placeholder="작성자"
-          onChange={props.onChangeWriter}
-        />
+        <S.Input placeholder="작성자" onChange={props.onChangeWriter} />
         <S.Input
           type="password"
           placeholder="비밀번호"
