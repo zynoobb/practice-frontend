@@ -1,9 +1,11 @@
+import { type MouseEvent } from "react";
+
 export default function CheckBox() {
-  const qqq2 = () => {
+  const qqq2 = (event: MouseEvent<HTMLInputElement>) => {
     event.stopPropagation();
     alert("2번 클릭");
   };
-  const qqq3 = (event) => {
+  const qqq3 = (event: MouseEvent<HTMLInputElement>) => {
     event.stopPropagation();
     alert("3번 클릭");
   };

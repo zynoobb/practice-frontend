@@ -1,5 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
-import { MouseEvent } from "react";
+import { type MouseEvent } from "react";
 import CheckBox from "./checkbox";
 
 const FETCH_BOARDS = gql`
@@ -30,7 +30,7 @@ export default function StaticRoutingMovedPage() {
     alert("1번 클릭");
   };
 
-  const qqq4 = (event) => {
+  const qqq4 = () => {
     alert("4번 클릭");
   };
   return (
