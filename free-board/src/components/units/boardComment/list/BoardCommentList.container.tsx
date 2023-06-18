@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import type { MouseEvent } from "react";
+import { useState } from "react";
+import type { ChangeEvent, MouseEvent } from "react";
 import type {
   IMutation,
   IMutationDeleteBoardCommentArgs,
@@ -17,6 +18,10 @@ export default function BoardCommentList(): JSX.Element {
   const router = useRouter();
   if (typeof router.query.boardId !== "string") return <></>;
 
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [boardCommentId, setBoardCommentId] = useState("");
+  const [password, setPassword] = useState("");
+
   const [deleteBoardComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
@@ -30,19 +35,14 @@ export default function BoardCommentList(): JSX.Element {
   });
 
   const onClickDelete = async (
-    event: MouseEvent<HTMLImageElement>
+    event: MouseEvent<HTMLButtonElement>
   ): Promise<void> => {
-    const password = prompt("비밀번호를 입력하세요.");
+    // const password = prompt("비밀번호를 입력하세요.");
     try {
-      if (!(event.target instanceof HTMLImageElement)) {
-        alert("시스템에 문제가 있습니다.");
-        return;
-      }
-
       await deleteBoardComment({
         variables: {
           password,
-          boardCommentId: event.target.id,
+          boardCommentId,
         },
         refetchQueries: [
           {
@@ -51,10 +51,37 @@ export default function BoardCommentList(): JSX.Element {
           },
         ],
       });
+      setIsOpenDeleteModal(false);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
   };
 
-  return <BoardCommentListUI data={data} onClickDelete={onClickDelete} />;
+  const onClickOpenDeleteModal = (
+    event: MouseEvent<HTMLImageElement>
+  ): void => {
+    setBoardCommentId(event.currentTarget.id);
+    setIsOpenDeleteModal(true);
+  };
+
+  const onChangeDeletePassword = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setPassword(event.target.value);
+  };
+
+  const closeDeleteModal = (event: MouseEvent<HTMLButtonElement>): void => {
+    setIsOpenDeleteModal(false);
+  };
+
+  return (
+    <BoardCommentListUI
+      data={data}
+      onClickDelete={onClickDelete}
+      isOpenDeleteModal={isOpenDeleteModal}
+      onClickOpenDeleteModal={onClickOpenDeleteModal}
+      onChangeDeletePassword={onChangeDeletePassword}
+      closeDeleteModal={closeDeleteModal}
+    />
+  );
 }

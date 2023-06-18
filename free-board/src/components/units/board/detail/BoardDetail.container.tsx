@@ -15,7 +15,7 @@ export default function BoardDetail(): JSX.Element {
     FETCH_BOARD,
     { variables: { boardId: router.query.boardId } }
   );
-
+  console.log(data);
   const onClickMoveToBoardEdit = (): void => {
     if (typeof router.query.boardId !== "string") {
       alert("시스템에 문제가 있습니다.");
