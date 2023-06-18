@@ -72,7 +72,9 @@ material ui
 
 // section 14
 레이아웃 => UI 배치
-
+font => woff2 확장자로 사용하기 => 압축률이 가장 높음
+FOIT(Flash Of Invisible Text) => 안보여지고 있다가 폰트 다운로드 시 보여줌
+FOUT(Flash Of Unstyled Text) => 기본 폰트로 보여준 뒤 폰트 다운로드 시 다운로드 된 폰트로 보여줌
 
 
 
