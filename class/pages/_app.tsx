@@ -1,9 +1,9 @@
 // import '../styles/globals.css'
 // 모든 페이지의 공통 설정들 여기서 진행
-
+import { type AppProps } from "next/app";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-export default function App({ Component }) {
+export default function App({ Component }: AppProps): JSX.Element {
   // graphql 적용
   const client = new ApolloClient({
     uri: "http://backend-example.codebootcamp.co.kr/graphql",
