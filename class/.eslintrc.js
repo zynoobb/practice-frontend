@@ -26,5 +26,6 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "react/prop-types": "off",
     "react/jsx-key": "off",
+    "array-callback-return": "off",
   },
 };
