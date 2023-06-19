@@ -42,5 +42,8 @@
     "husky": "^8.0.3",
     "prettier": "2.8.8",
     "typescript": "*"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2"
   }
 }
