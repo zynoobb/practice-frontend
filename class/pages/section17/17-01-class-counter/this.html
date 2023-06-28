@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>this의 이해</title>
+    <script>
+      class ClassCounterPage {
+        count = 10;
+
+        // 방법1 화살표 함수로 binding 자동으로 설정되게 함
+        onClickCountUp = () => {
+          console.log("현재 카운트", this.count);
+          this.count++;
+        };
+
+        render() {
+          const button = document.createElement("button");
+          button.innerText = "카운트 올리기";
+          button.addEventListener("click", this.onClickCountUp.bind(this)); // 방법2 bind(this)를 통해 연결시키는 방법
+          document.body.appendChild(button);
+        }
+      }
+
+      window.onload = () => {
+        const counter = new ClassCounterPage();
+        counter.render();
+      };
+    </script>
+  </head>
+  <body></body>
+</html>
