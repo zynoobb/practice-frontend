@@ -83,3 +83,9 @@ FOUT(Flash Of Unstyled Text) => 기본 폰트로 보여준 뒤 폰트 다운로�
 
 // section 16
 lodash => 깊은복사 라이브러리
+
+// section 21
+globalState 에 대한 이해
+- 종류 : (redux(redux-tool-kit) / mobx / SWR) => 현재 Recoil 사용
+- 특징 : 글로벌로 적용 가능한 state / props 없이 재사용. (캐싱)
+
