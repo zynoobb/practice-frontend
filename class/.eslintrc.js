@@ -27,5 +27,7 @@ module.exports = {
     "react/prop-types": "off",
     "react/jsx-key": "off",
     "array-callback-return": "off",
+    "react/display-name": "off",
+    "@typescript-eslint/no-unused-vars": "off",
   },
 };
