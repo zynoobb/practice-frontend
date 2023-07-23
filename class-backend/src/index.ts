@@ -2,6 +2,7 @@ import { ApolloServer } from "@apollo/server";
 // import express from "express";
 import { AppDataSource } from "./db";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { Board } from "./Board.postgres";
 
 // const app = express();
 // app.use(express.json());
@@ -12,15 +13,58 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 
 // API-DOCS
 const typeDefs = `#graphql
+  type MyBoard {
+    number: Int
+    writer: String
+    title: String
+    contents: String
+  }
+  
+  input CreateBoardInput {
+    writer:String
+    title:String
+    contents:String
+  }
+
   type Query {
-    hello:String
+    fetchBoards: [MyBoard]
+  }
+  
+  type Mutation {
+    # createBoard(writer:String, title:String, contents:String): String
+    createBoard(createBoardInput:CreateBoardInput): MyBoard
   }
 `;
 
 // API
 const resolvers = {
   Query: {
-    hello: () => "world",
+    fetchBoards: async () => {
+      const result = await Board.find();
+      console.log(result);
+      return result;
+    },
+  },
+
+  Mutation: {
+    createBoard: async (parent: any, args: any, context: any, info: any) => {
+      console.log({ ...args.createBoardInput });
+      const result = await Board.save({
+        ...args.createBoardInput,
+        // writer: args.createBoardInput.writer,
+        // title: args.createBoardInput.title,
+        // contents: args.createBoardInput.contents,
+      });
+      console.log(result);
+
+      return result;
+    },
+    // updateBoard: async() => {
+    //   await Board.update({number: 3}, {writer : "영희"})
+    // },
+    // deleteBoard: async () => {
+    //   await Board.delete({number:3})
+    // }
   },
 };
 
